@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="cn.com.ethank.AboutRxJavaActiivty">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rx有什么好处?"
+        android:textColor="@color/app_text_black"
+        android:textSize="@dimen/app_text_big" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="
+        使用观察者模式
+
+创建：Rx可以方便的创建事件流和数据流
+组合：Rx使用查询式的操作符组合和变换数据流
+监听：Rx可以订阅任何可观察的数据流并执行操作
+
+        简化代码
+
+函数式风格：对可观察数据流使用无副作用的输入输出函数，避免了程序里错综复杂的状态
+简化代码：Rx的操作符通通常可以将复杂的难题简化为很少的几行代码
+异步错误处理：传统的try/catch没办法处理异步计算，Rx提供了合适的错误处理机制
+轻松使用并发：Rx的Observables和Schedulers让开发者可以摆脱底层的线程同步和各种并发问题"
+        android:textColor="@color/app_text_light_black"
+        android:textSize="@dimen/app_text_nomal" />
+
+</LinearLayout>

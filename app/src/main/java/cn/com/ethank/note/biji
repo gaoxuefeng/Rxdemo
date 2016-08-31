@@ -1,0 +1,103 @@
+1.Observer
+//执行者
+ Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("我是高雪峰");
+                subscriber.onCompleted();
+            }
+        });
+ //观察者
+Subscriber<String> subscriber = new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.i(Tag, s);
+                    }
+                };
+//串联起来
+observable1.subscribe(subscriber);
+Observable.just()//只执行一件事
+//map进行转化,第一个参数是入参第二个结果是出参
+Observable.map(new Func1<String, String>() {
+                            @Override
+                            public String call(String s) {
+                                return s + "duibudui";
+                            }
+                        })
+//简单的观察者,只关注onNext,不关心结果
+Observable.subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                Log.i(Tag + "最简单", s);
+            }
+        });
+
+//from 对数组遍历,返回单个
+ Observable.from(strings)
+ //flatmap跟map不通点就是 flatmap 返回 Observable<String>而map返回String
+ //take(5)执行5次
+ //
+
+ 在子类使用Observable中的compose操作符，调用，完成Observable发布的事件和当前的组件绑定，实现生命周期同步。从而实现当前组件生命周期结束时，自动取消对Observable订阅。
+ doOnNext()允许我们在每次subscribe输出一个元素之前做一些额外的事情
+
+
+ ////////////////Android 高级用法
+ //意思是每一秒钟发送一次并且绑定到生命周期
+  Observable.interval(1, TimeUnit.SECONDS).compose(this.bindToLifecycle())
+  二、bindUntilEvent()方法
+
+  使用ActivityEvent类，其中的CREATE、START、 RESUME、PAUSE、STOP、 DESTROY分别对应生命周期内的方法。使用bindUntilEvent指定在哪个生命周期方法调用时取消订阅。
+  二、bindUntilEvent()方法
+
+  使用ActivityEvent类，其中的CREATE、START、 RESUME、PAUSE、STOP、 DESTROY分别对应生命周期内的方法。使用bindUntilEvent指定在哪个生命周期方法调用时取消订阅。
+
+  Observable.interval(1, TimeUnit.SECONDS).compose(this.bindUntilEvent(ActivityEvent.PAUSE)).subscribe(mSub);
+如果大家想学习RxJava 和RxAndroid 可以看看这几篇文章
+前三篇主要是RxJava,最后一篇是Rxlifecycle 主要是关于生命周期的管理
+http://blog.csdn.net/lzyzsd/article/details/41833541
+http://blog.csdn.net/lzyzsd/article/details/44094895
+http://blog.csdn.net/lzyzsd/article/details/44891933
+http://www.jianshu.com/p/a3ad9dd20655
+//rxjava中的方法介绍
+http://blog.csdn.net/evan_man/article/details/51292099
+//rx是什么介绍
+http://gank.io/post/560e15be2dca930e00da1083
+
+//线程
+Schedulers能创建如下几种类型的线程：
+Schedulers.immediate(): 直接在当前线程运行，相当于不指定线程。这是默认的 Scheduler
+Schedulers.newThread(): 总是启用新线程，并在新线程执行操作
+Schedulers.io():一个无数量上限的线程池，可以重用空闲的线程
+Schedulers.computation():Scheduler 使用的固定的线程池，大小为 CPU 核数
+AndroidSchedulers.mainThread()，它指定的操作将在 Android 主线程运行
+//
+FuncX跟 Action的区别
+FuncX：: 对有参数且有返回值的一类方法的包装
+ActionX: 对只有参数没有返回值的一类方法的包装
+//
+flatMap方法
+flatMap() 的原理：
+1. 使用传入的事件对象创建一个 Observable 对象；
+2. 并不发送这个 Observable, 而是将它激活，于是它开始发送事件；
+3. 每一个创建出来的 Observable 发送的事件，都被汇入同一个 Observable ，而这个 Observable 负责将这些事件统一交给 Subscriber 的回调方法。
+//对数组进行过滤
+Observable.filter(new Func1<ArrayList<String>, Boolean>() {
+            @Override
+            public Boolean call(ArrayList<String> strings) {
+                return strings.;
+            }
+        })
+  //去抖动
+ throttleFirst(): 在每次事件触发后的一定时间间隔内丢弃新的事件。常用作去抖动过滤，例如按钮的点击监听器：
+RxView.clickEvents(button) // RxBinding 代码，后面的文章有解释 .throttleFirst(500, TimeUnit.MILLISECONDS) // 设置防抖间隔为 500ms .subscribe(subscriber);

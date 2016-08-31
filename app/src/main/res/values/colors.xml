@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="app_text_black">#2a3342</color>
+    <!--墨黑色文字-->
+    <color name="app_text_light_black">#798394</color>
+ 
+</resources>
